@@ -1,5 +1,6 @@
 !pip install qiskit qiskit-machine-learning pylatexenc --user
 !pip install tensorflow
+!pip install qiskit-terra
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -13,6 +14,8 @@ from qiskit.utils import QuantumInstance, algorithm_globals
 from qiskit_machine_learning.algorithms.classifiers import NeuralNetworkClassifier
 from qiskit.algorithms.optimizers import SPSA, COBYLA
 from sklearn.metrics import accuracy_score
+from qiskit.circuit import QuantumCircuit
+from qiskit import transpile
 
 # iris 데이터셋 로드
 data = load_iris(as_frame=False)
@@ -91,3 +94,6 @@ plt.xlabel("data index")
 plt.legend()
 plt.title("real and predict compare graph")
 plt.show()
+
+qc_transpiled = transpile(qc, backend=backend)
+qc_transpiled.draw('mpl')
